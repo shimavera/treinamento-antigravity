@@ -65,6 +65,12 @@ Cada guia explica como configurar passo a passo:
 
 ---
 
+---
+
+**Instagram:** [@juansaraivalourenco](https://instagram.com/juansaraivalourenco)
+
+---
+
 ## Projeto do treinamento
 
 Resumo automatico de grupos WhatsApp usando:

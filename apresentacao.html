@@ -103,96 +103,48 @@
   /* Mascot pig - Claude Code style */
   .mascot {
     position: fixed;
-    bottom: 20px;
+    bottom: 30px;
     left: 50%;
-    transform: translateX(-50%);
     z-index: 50;
-    animation: float 3s ease-in-out infinite;
     cursor: default;
-    transition: transform 0.3s;
+    transition: left 3s cubic-bezier(0.25, 0.1, 0.25, 1),
+                top 3s cubic-bezier(0.25, 0.1, 0.25, 1),
+                bottom 3s cubic-bezier(0.25, 0.1, 0.25, 1),
+                transform 0.3s;
+    pointer-events: none;
   }
 
-  .mascot:hover {
-    animation: wiggle 0.5s ease-in-out;
+  .mascot.walking {
+    animation: walk-bounce 0.4s ease-in-out infinite;
   }
 
-  .pig {
-    width: 40px;
-    height: 34px;
-    position: relative;
+  .mascot.idle {
+    animation: float 3s ease-in-out infinite;
   }
 
-  .pig-body {
-    width: 32px;
-    height: 24px;
-    background: #d4956b;
-    border-radius: 6px;
-    position: absolute;
-    top: 0;
-    left: 4px;
+  .mascot.flip {
+    transform: scaleX(-1);
   }
 
-  .pig-ear-l, .pig-ear-r {
-    width: 8px;
-    height: 8px;
-    background: #c4855b;
-    border-radius: 2px;
-    position: absolute;
-    top: -4px;
+  @keyframes walk-bounce {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-4px) rotate(-3deg); }
+    75% { transform: translateY(-4px) rotate(3deg); }
   }
 
-  .pig-ear-l { left: 6px; }
-  .pig-ear-r { right: 6px; }
+  @keyframes walk-bounce-flip {
+    0%, 100% { transform: translateY(0) scaleX(-1) rotate(0deg); }
+    25% { transform: translateY(-4px) scaleX(-1) rotate(-3deg); }
+    75% { transform: translateY(-4px) scaleX(-1) rotate(3deg); }
+  }
 
-  .pig-eye-l, .pig-eye-r {
-    width: 4px;
-    height: 4px;
-    background: #1a1a2e;
-    border-radius: 1px;
-    position: absolute;
-    top: 7px;
+  .mascot.walking.flip {
+    animation: walk-bounce-flip 0.4s ease-in-out infinite;
+  }
+
+  .claude-eye {
     animation: blink 4s infinite;
   }
-
-  .pig-eye-l { left: 11px; }
-  .pig-eye-r { right: 11px; }
-
-  .pig-snout {
-    width: 14px;
-    height: 8px;
-    background: #c4855b;
-    border-radius: 3px;
-    position: absolute;
-    top: 12px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  .pig-nostril-l, .pig-nostril-r {
-    width: 3px;
-    height: 3px;
-    background: #9a6540;
-    border-radius: 1px;
-    position: absolute;
-    top: 2px;
-  }
-
-  .pig-nostril-l { left: 2px; }
-  .pig-nostril-r { right: 2px; }
-
-  .pig-leg {
-    width: 4px;
-    height: 6px;
-    background: #c4855b;
-    position: absolute;
-    bottom: -6px;
-    border-radius: 0 0 2px 2px;
-  }
-
-  .pig-leg:nth-child(7) { left: 8px; }
-  .pig-leg:nth-child(8) { left: 16px; }
-  .pig-leg:nth-child(9) { right: 8px; }
-  .pig-leg:nth-child(10) { right: 16px; }
 
   /* Animated slide elements */
   .slide.active .section-tag {
@@ -699,24 +651,28 @@
 <div class="slide-counter" id="counter"></div>
 <div class="nav-hint">← → para navegar</div>
 
-<!-- Mascot Pig -->
+<!-- Claude Mascot -->
 <div class="mascot" id="mascot">
-  <div class="pig">
-    <div class="pig-ear-l"></div>
-    <div class="pig-ear-r"></div>
-    <div class="pig-body">
-      <div class="pig-eye-l"></div>
-      <div class="pig-eye-r"></div>
-      <div class="pig-snout">
-        <div class="pig-nostril-l"></div>
-        <div class="pig-nostril-r"></div>
-      </div>
-    </div>
-    <div class="pig-leg"></div>
-    <div class="pig-leg"></div>
-    <div class="pig-leg"></div>
-    <div class="pig-leg"></div>
-  </div>
+  <svg width="48" height="44" viewBox="0 0 48 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Body -->
+    <rect x="8" y="4" width="32" height="28" rx="4" fill="#D4956B"/>
+    <!-- Ears -->
+    <rect x="6" y="0" width="10" height="10" rx="2" fill="#C4855B"/>
+    <rect x="32" y="0" width="10" height="10" rx="2" fill="#C4855B"/>
+    <!-- Eyes -->
+    <rect x="15" y="12" width="5" height="5" rx="1" fill="#1a1a2e" class="claude-eye"/>
+    <rect x="28" y="12" width="5" height="5" rx="1" fill="#1a1a2e" class="claude-eye"/>
+    <!-- Snout -->
+    <rect x="17" y="20" width="14" height="8" rx="3" fill="#C4855B"/>
+    <!-- Nostrils -->
+    <rect x="20" y="22" width="3" height="3" rx="1" fill="#9A6540"/>
+    <rect x="26" y="22" width="3" height="3" rx="1" fill="#9A6540"/>
+    <!-- Legs -->
+    <rect x="12" y="32" width="5" height="8" rx="2" fill="#C4855B"/>
+    <rect x="20" y="32" width="5" height="8" rx="2" fill="#C4855B"/>
+    <rect x="28" y="32" width="5" height="8" rx="2" fill="#C4855B"/>
+    <rect x="36" y="32" width="5" height="8" rx="2" fill="#C4855B"/>
+  </svg>
 </div>
 
 <!-- SLIDE 1: CAPA -->
@@ -743,8 +699,9 @@
     <li><span class="bullet"></span><strong style="color:var(--text)">O que e o Antigravity</strong> — ferramenta de IA no terminal</li>
     <li><span class="bullet green"></span><strong style="color:var(--text)">Skills & MCPs</strong> — superpoderes do Claude</li>
     <li><span class="bullet blue"></span><strong style="color:var(--text)">Obsidian</strong> — base de conhecimento e contexto para IA</li>
-    <li><span class="bullet cyan"></span><strong style="color:var(--text)">Stack gratuita + APIs & Webhooks</strong> — ferramentas e conexoes</li>
-    <li><span class="bullet orange"></span><strong style="color:var(--text)">Projeto ao vivo</strong> — Resumo de grupos WhatsApp</li>
+    <li><span class="bullet cyan"></span><strong style="color:var(--text)">n8n + VPS</strong> — automacoes visuais e servidor na nuvem</li>
+    <li><span class="bullet orange"></span><strong style="color:var(--text)">Stack gratuita + APIs & Webhooks</strong> — ferramentas e conexoes</li>
+    <li><span class="bullet" style="background:var(--red)"></span><strong style="color:var(--text)">Projeto ao vivo</strong> — Resumo de grupos WhatsApp</li>
   </ul>
 </div>
 
@@ -752,8 +709,12 @@
 <div class="slide" id="slide-3">
   <div class="section-tag">Parte 1</div>
   <h2>O que e <span class="gradient-text">Antigravity</span>?</h2>
-  <p style="max-width: 700px; text-align: center; margin-bottom: 30px;">
-    Uma ferramenta de IA que roda no terminal. Voce conversa com a IA e ela escreve codigo, cria arquivos, roda comandos — tudo pelo chat.
+  <p style="max-width: 700px; text-align: center; margin-bottom: 10px;">
+    Uma <strong style="color:var(--text)">IDE de IA</strong> que roda no terminal. Voce conversa com a IA e ela escreve codigo, cria arquivos, roda comandos — tudo pelo chat.
+  </p>
+  <p style="max-width: 700px; text-align: center; margin-bottom: 30px; font-size: 1rem; color: var(--accent2);">
+    IDE = Integrated Development Environment (Ambiente de Desenvolvimento Integrado).<br>
+    E o lugar onde o programador trabalha — edita codigo, testa, roda comandos. Tipo um "escritorio digital" para criar software.
   </p>
   <div class="cards-grid">
     <div class="card">
@@ -1143,6 +1104,133 @@
   </div>
 </div>
 
+<!-- SLIDE: O QUE É O N8N -->
+<div class="slide">
+  <div class="section-tag">Parte 4 — n8n</div>
+  <h2>O que e o <span class="gradient-text">n8n</span>?</h2>
+  <p style="max-width: 750px; text-align: center; margin-bottom: 20px;">
+    n8n e uma ferramenta de automacao visual. Voce conecta "blocos" (nos) e cria fluxos que rodam sozinhos — sem precisar programar.
+  </p>
+  <div class="cards-grid">
+    <div class="card">
+      <span class="card-icon">🧩</span>
+      <h3>Arrastar e Soltar</h3>
+      <p>Interface visual — voce monta o fluxo conectando blocos como se fosse um quebra-cabeca</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🔄</span>
+      <h3>Automacao Real</h3>
+      <p>Conecta WhatsApp + banco de dados + IA + email + qualquer servico. Roda 24h sozinho</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">💡</span>
+      <h3>Open Source</h3>
+      <p>Codigo aberto e gratuito. Pode rodar na sua propria VPS ou usar o n8n Cloud (trial)</p>
+    </div>
+  </div>
+  <div class="flow mt-30">
+    <div class="flow-box">
+      <div class="label">Trigger</div>
+      <div class="value">⚡ Webhook</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box">
+      <div class="label">Processar</div>
+      <div class="value">🔧 Filtrar</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box highlight">
+      <div class="label">IA</div>
+      <div class="value">🧠 Claude</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box">
+      <div class="label">Acao</div>
+      <div class="value">📩 Enviar</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE: N8N NA PRÁTICA -->
+<div class="slide">
+  <div class="section-tag">Parte 4 — n8n</div>
+  <h2>n8n na <span class="gradient-purple">pratica</span></h2>
+  <div class="two-cols mt-20">
+    <div class="col">
+      <h3 style="color: var(--accent2);">Tipos de Nos (blocos)</h3>
+      <ul>
+        <li><strong style="color:var(--text)">Trigger</strong> — O que inicia o fluxo (webhook, cron, mensagem)</li>
+        <li><strong style="color:var(--text)">IF / Switch</strong> — Decisoes (se X, faz Y)</li>
+        <li><strong style="color:var(--text)">Code</strong> — JavaScript/Python customizado</li>
+        <li><strong style="color:var(--text)">HTTP Request</strong> — Chamar qualquer API</li>
+        <li><strong style="color:var(--text)">Supabase / Postgres</strong> — Banco de dados</li>
+        <li><strong style="color:var(--text)">AI Agent</strong> — IA com ferramentas</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3 style="color: var(--green);">Onde rodar</h3>
+      <ul>
+        <li><strong style="color:var(--text)">n8n Cloud</strong> — Trial gratis, mais facil</li>
+        <li><strong style="color:var(--text)">VPS propria</strong> — Mais controle, mais barato a longo prazo</li>
+        <li><strong style="color:var(--text)">Docker</strong> — Um comando e ta rodando</li>
+      </ul>
+      <div class="code-block" style="margin-top: 16px; font-size: 0.85rem;">
+        <span class="comment"># Rodar n8n com Docker:</span><br>
+        <span class="keyword">docker</span> run -it --rm \<br>
+        &nbsp;&nbsp;-p <span class="string">5678:5678</span> \<br>
+        &nbsp;&nbsp;n8nio/n8n
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE: O QUE É VPS -->
+<div class="slide">
+  <div class="section-tag">Parte 4 — Infraestrutura</div>
+  <h2>O que e uma <span class="gradient-text">VPS</span>?</h2>
+  <p style="max-width: 750px; text-align: center; margin-bottom: 20px;">
+    VPS = Virtual Private Server. E um computador na nuvem que fica ligado 24h — voce instala o que quiser e roda seus servicos.
+  </p>
+  <div class="cards-grid">
+    <div class="card">
+      <span class="card-icon">🖥️</span>
+      <h3>Seu Servidor</h3>
+      <p>Como ter um computador ligado 24h na nuvem. Voce acessa via terminal (SSH)</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🐳</span>
+      <h3>Docker</h3>
+      <p>Ferramenta que "empacota" apps. Um comando e tudo instala: n8n, Evolution API, banco de dados</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">💰</span>
+      <h3>Custo Baixo</h3>
+      <p>A partir de R$30-50/mes (Hetzner, Contabo, Oracle Free Tier). Roda tudo que precisamos</p>
+    </div>
+  </div>
+  <div class="flow mt-30">
+    <div class="flow-box">
+      <div class="label">VPS</div>
+      <div class="value">🖥️ Ubuntu</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box">
+      <div class="label">Docker</div>
+      <div class="value">🐳 Container</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box highlight">
+      <div class="label">Servicos</div>
+      <div class="value">n8n + Evolution</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box">
+      <div class="label">Dominio</div>
+      <div class="value">🌐 HTTPS</div>
+    </div>
+  </div>
+</div>
+
 <!-- SLIDE 12: PROJETO AO VIVO -->
 <div class="slide" id="slide-12">
   <div class="section-tag">Parte 5 — Mao na Massa</div>
@@ -1280,7 +1368,11 @@
     <span class="tag blue">Stack gratuita</span>
     <span class="tag cyan">Projeto real</span>
   </div>
-  <p style="margin-top: 60px; font-size: 1.1rem; color: var(--muted);">
+  <div style="margin-top: 40px; background: var(--surface); border: 1px solid var(--accent); border-radius: 12px; padding: 20px 30px; text-align: center;">
+    <p style="font-size: 0.9rem; color: var(--muted); margin-bottom: 6px;">Materiais + Skills para instalar:</p>
+    <p style="font-size: 1.2rem; color: var(--accent2); font-weight: 600; font-family: monospace;">github.com/shimavera/treinamento-antigravity</p>
+  </div>
+  <p style="margin-top: 30px; font-size: 1rem; color: var(--muted);">
     IA Antigravity + Claude Code — Treinamento 2026
   </p>
 </div>
@@ -1310,6 +1402,55 @@
   });
 
   updateSlide();
+
+  // === MASCOT WANDERING ===
+  const mascot = document.getElementById('mascot');
+  let mascotIdle = true;
+
+  function randomPos() {
+    const x = 40 + Math.random() * (window.innerWidth - 100);
+    const y = 40 + Math.random() * (window.innerHeight - 100);
+    return { x, y };
+  }
+
+  function moveMascot() {
+    const pos = randomPos();
+    const currentLeft = mascot.getBoundingClientRect().left;
+    const goingRight = pos.x > currentLeft;
+
+    // Flip based on direction
+    if (goingRight) {
+      mascot.classList.remove('flip');
+    } else {
+      mascot.classList.add('flip');
+    }
+
+    // Start walking animation
+    mascot.classList.remove('idle');
+    mascot.classList.add('walking');
+
+    // Move to new position
+    mascot.style.left = pos.x + 'px';
+    mascot.style.top = pos.y + 'px';
+    mascot.style.bottom = 'auto';
+
+    // Stop walking after transition ends
+    setTimeout(() => {
+      mascot.classList.remove('walking');
+      mascot.classList.add('idle');
+    }, 3000);
+  }
+
+  // Initial idle state
+  mascot.classList.add('idle');
+
+  // First move after 8 seconds, then every 15-25 seconds
+  setTimeout(() => {
+    moveMascot();
+    setInterval(() => {
+      moveMascot();
+    }, 15000 + Math.random() * 10000);
+  }, 8000);
 </script>
 
 </body>

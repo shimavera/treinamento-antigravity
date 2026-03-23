@@ -1,8 +1,10 @@
-# Skills — Treinamento IA Antigravity + Claude Code
+# Treinamento IA Antigravity + Claude Code
 
-Skills para usar no Claude Code / Antigravity durante o treinamento.
+Skills e MCPs para usar no Claude Code / Antigravity durante o treinamento.
 
-## Skills disponiveis
+---
+
+## Skills disponiveis (9)
 
 ### Automacao & WhatsApp
 | Skill | O que faz |
@@ -25,18 +27,16 @@ Skills para usar no Claude Code / Antigravity durante o treinamento.
 |-------|-----------|
 | `mcp-builder` | Criar servidores MCP para conectar o Claude a APIs |
 
-## Como instalar
+### Como instalar skills
 
-### Opcao 1 — Clonar tudo (mais facil)
+**Opcao 1 — Clonar tudo (mais facil)**
 
 ```bash
 git clone https://github.com/shimavera/treinamento-antigravity.git
 cp -r treinamento-antigravity/skills/* ~/.claude/skills/
 ```
 
-### Opcao 2 — Instalar uma por uma no Claude Code
-
-Abra o Claude Code e digite:
+**Opcao 2 — Instalar uma por uma no Claude Code**
 
 ```
 /install-skill https://raw.githubusercontent.com/shimavera/treinamento-antigravity/main/skills/evolution-api/SKILL.md
@@ -49,6 +49,21 @@ Abra o Claude Code e digite:
 /install-skill https://raw.githubusercontent.com/shimavera/treinamento-antigravity/main/skills/obsidian-bases/SKILL.md
 /install-skill https://raw.githubusercontent.com/shimavera/treinamento-antigravity/main/skills/mcp-builder/SKILL.md
 ```
+
+---
+
+## MCPs — Conectar o Claude a servicos reais
+
+MCPs permitem que o Claude acesse bancos de dados, WhatsApp e automacoes direto pelo chat.
+Cada guia explica como configurar passo a passo:
+
+| MCP | Guia | O que faz |
+|-----|------|-----------|
+| Supabase | [mcps/supabase.md](mcps/supabase.md) | Consultar banco de dados, rodar SQL, criar tabelas |
+| Evolution API | [mcps/evolution-api.md](mcps/evolution-api.md) | Gerenciar WhatsApp, enviar mensagens, webhooks |
+| n8n | [mcps/n8n.md](mcps/n8n.md) | Listar workflows, verificar execucoes, buscar erros |
+
+---
 
 ## Projeto do treinamento
 
